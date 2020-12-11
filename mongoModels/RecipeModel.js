@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Ingredient = require('./ingredient');
+const Ingredient = require('./IngredientModel');
 
 const recipeSchema = new Schema({
     name: String,
