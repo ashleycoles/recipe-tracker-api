@@ -1,6 +1,5 @@
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require('graphql');
 const mongoose = require('mongoose').set('debug', true);
 
 mongoose.connect('mongodb://root:password@localhost:27017', {
