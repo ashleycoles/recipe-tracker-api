@@ -1,6 +1,7 @@
 const graphql = require('graphql');
 
 const Recipe = require('./mongo-models/recipe');
+const Cuisine = require('./mongo-models/cuisine');
 
 const {
     GraphQLObjectType,
@@ -28,6 +29,18 @@ const RecipeType = new GraphQLObjectType({
     })
 });
 
+const CuisineType = new GraphQLObjectType({
+    name: 'cuisines',
+    fields: () => ({
+        _id: {
+            type: GraphQLID
+        },
+        name: {
+            type: GraphQLString
+        }
+    })
+});
+
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
@@ -46,6 +59,23 @@ const RootQuery = new GraphQLObjectType({
             type: new GraphQLList(RecipeType),
             resolve(parent, args) {
                 return Recipe.find({});
+            }
+        },
+        cuisine: {
+            type: CuisineType,
+            args: {
+                id: {
+                    type: GraphQLID
+                }
+            },
+            resolve(parent, args) {
+                return Cuisine.findById(args.id)
+            }
+        },
+        cuisines: {
+            type: new GraphQLList(CuisineType),
+            resolve(parent, args) {
+                return Cuisine.find({});
             }
         }
     }
