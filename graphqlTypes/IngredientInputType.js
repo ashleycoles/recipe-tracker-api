@@ -6,13 +6,16 @@ const {
 } = graphql;
 
 module.exports = new GraphQLInputObjectType({
-    name: 'ingredientinput',
+    name: 'IngredientInput',
+    description: 'An ingredient with associated amount',
     fields: () => ({
         name: {
-            type: GraphQLString
+            type: GraphQLString,
+            description: 'Name of the ingredient'
         },
         amount: {
-            type: GraphQLString
+            type: GraphQLString,
+            description: 'Amount of the ingredient with units'
         }
     })
 });

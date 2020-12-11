@@ -21,9 +21,11 @@ module.exports = new GraphQLObjectType({
     fields: {
         recipe: {
             type: RecipeType,
+            description: 'Retrieve a single recipe by ID',
             args: {
                 id: {
-                    type: GraphQLID
+                    type: GraphQLID,
+                    description: 'ObjectId'
                 }
             },
             resolve(parent, args) {
@@ -32,15 +34,18 @@ module.exports = new GraphQLObjectType({
         },
         recipes: {
             type: new GraphQLList(RecipeType),
+            description: 'Retrieve all recipes',
             resolve(parent, args) {
                 return RecipeModel.find({});
             }
         },
         cuisine: {
             type: CuisineType,
+            description: 'Retrieve a single cuisine by ID',
             args: {
                 id: {
-                    type: GraphQLID
+                    type: GraphQLID,
+                    description: 'ObjectId'
                 }
             },
             resolve(parent, args) {
@@ -49,6 +54,7 @@ module.exports = new GraphQLObjectType({
         },
         cuisines: {
             type: new GraphQLList(CuisineType),
+            description: "Retrieve all cuisines",
             resolve(parent, args) {
                 return CuisineModel.find({});
             }

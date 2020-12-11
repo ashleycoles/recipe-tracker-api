@@ -7,13 +7,16 @@ const {
 } = graphql;
 
 module.exports = new GraphQLObjectType({
-    name: 'cuisines',
+    name: 'Cuisine',
+    description: 'A world cuisine',
     fields: () => ({
         _id: {
-            type: GraphQLID
+            type: GraphQLID,
+            description: "ObjectId"
         },
         name: {
-            type: GraphQLString
+            type: GraphQLString,
+            description: "Name of the cuisine"
         }
     })
 });

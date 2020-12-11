@@ -21,9 +21,11 @@ module.exports = new GraphQLObjectType({
     fields: {
         addCuisine: {
             type: CuisineType,
+            description: 'Add a single cuisine',
             args: {
                 name: {
-                    type: new GraphQLNonNull(GraphQLString)
+                    type: new GraphQLNonNull(GraphQLString),
+                    description: "Name of the cuisine"
                 }
             },
             resolve(parent, args) {
@@ -35,12 +37,15 @@ module.exports = new GraphQLObjectType({
         },
         addRecipe: {
             type: RecipeType,
+            description: 'Add a single recipe',
             args: {
                 name: {
-                    type: new GraphQLNonNull(GraphQLString)
+                    type: new GraphQLNonNull(GraphQLString),
+                    description: 'Name of the recipe'
                 },
                 ingredients: {
-                    type: new GraphQLNonNull(GraphQLList(IngredientInputType))
+                    type: new GraphQLNonNull(GraphQLList(IngredientInputType)),
+                    description: 'Array of IngredientTypes'
                 }
             },
             resolve(parent, args) {

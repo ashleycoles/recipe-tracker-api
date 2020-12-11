@@ -7,12 +7,15 @@ const {
 
 module.exports = new GraphQLObjectType({
     name: 'ingredient',
+    description: 'An ingredient with associated amount',
     fields: () => ({
         name: {
-            type: GraphQLString
+            type: GraphQLString,
+            description: 'Name of the ingredient'
         },
         amount: {
-            type: GraphQLString
+            type: GraphQLString,
+            description: 'Amount of the ingredient with units'
         }
     })
 });

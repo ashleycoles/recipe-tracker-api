@@ -10,16 +10,20 @@ const {
 const IngredientType = require('./IngredientType');
 
 module.exports = new GraphQLObjectType({
-    name: 'recipes',
+    name: 'Recipe',
+    description: 'A single recipe',
     fields: () => ({
         _id: {
-            type: GraphQLID
+            type: GraphQLID,
+            description: 'ObjectId'
         },
         name: {
-            type: GraphQLString
+            type: GraphQLString,
+            description: 'Name of the recipe'
         },
         ingredients: {
-            type: new GraphQLList(IngredientType)
+            type: new GraphQLList(IngredientType),
+            description: 'Array of IngredientTypes'
         }
     })
 });
