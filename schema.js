@@ -5,14 +5,37 @@ const Cuisine = require('./mongo-models/cuisine');
 
 const {
     GraphQLObjectType,
+    GraphQLInputObjectType,
     GraphQLString,
-    GraphQLBoolean,
     GraphQLSchema,
     GraphQLID,
-    GraphQLFloat,
     GraphQLList,
     GraphQLNonNull
 } = graphql;
+
+const IngredientType = new GraphQLObjectType({
+    name: 'ingredient',
+    fields: () => ({
+        name: {
+            type: GraphQLString
+        },
+        amount: {
+            type: GraphQLString
+        }
+    })
+});
+
+const IngredientInputType = new GraphQLInputObjectType({
+    name: 'ingredientinput',
+    fields: () => ({
+        name: {
+            type: GraphQLString
+        },
+        amount: {
+            type: GraphQLString
+        }
+    })
+})
 
 const RecipeType = new GraphQLObjectType({
     name: 'recipes',
@@ -24,7 +47,7 @@ const RecipeType = new GraphQLObjectType({
             type: GraphQLString
         },
         ingredients: {
-            type: new GraphQLList(GraphQLString)
+            type: new GraphQLList(IngredientType)
         }
     })
 });
@@ -105,7 +128,7 @@ const Mutation = new GraphQLObjectType({
                     type: new GraphQLNonNull(GraphQLString)
                 },
                 ingredients: {
-                    type: new GraphQLNonNull(GraphQLList(GraphQLString))
+                    type: new GraphQLNonNull(GraphQLList(IngredientInputType))
                 }
             },
             resolve(parent, args) {
