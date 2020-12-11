@@ -21,6 +21,9 @@ const RecipeType = new GraphQLObjectType({
         },
         name: {
             type: GraphQLString
+        },
+        ingredients: {
+            type: new GraphQLList(GraphQLString)
         }
     })
 });
