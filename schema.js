@@ -92,11 +92,28 @@ const Mutation = new GraphQLObjectType({
                 }
             },
             resolve(parent, args) {
-                Cuisine.init()
                 let cuisine = new Cuisine({
                     name: args.name
                 })
                 return cuisine.save();
+            }
+        },
+        addRecipe: {
+            type: RecipeType,
+            args: {
+                name: {
+                    type: new GraphQLNonNull(GraphQLString)
+                },
+                ingredients: {
+                    type: new GraphQLNonNull(GraphQLList(GraphQLString))
+                }
+            },
+            resolve(parent, args) {
+                let recipe = new Recipe({
+                    name: args.name,
+                    ingredients: args.ingredients
+                })
+                return recipe.save();
             }
         }
     }
