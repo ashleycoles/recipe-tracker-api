@@ -8,6 +8,7 @@ const {
 } = graphql;
 
 const IngredientType = require('./IngredientType');
+const CuisineType = require('./CuisineType');
 
 module.exports = new GraphQLObjectType({
     name: 'Recipe',
@@ -24,6 +25,10 @@ module.exports = new GraphQLObjectType({
         ingredients: {
             type: new GraphQLList(IngredientType),
             description: 'Array of IngredientTypes'
+        },
+        cuisine: {
+            type:  CuisineType,
+            description: 'A world cuisine'
         }
     })
 });

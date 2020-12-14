@@ -11,6 +11,7 @@ const {
 const RecipeType = require('../graphqlTypes/RecipeType');
 const CuisineType = require('../graphqlTypes/CuisineType');
 const IngredientInputType = require('../graphqlTypes/IngredientInputType');
+const CuisineInputType = require('../graphqlTypes/CuisineInputType');
 
 // Mongoose Models
 const RecipeModel = require('../mongoModels/RecipeModel');
@@ -46,13 +47,20 @@ module.exports = new GraphQLObjectType({
                 ingredients: {
                     type: new GraphQLNonNull(GraphQLList(IngredientInputType)),
                     description: 'Array of IngredientTypes'
+                },
+                cuisine: {
+                    type: new GraphQLNonNull(CuisineInputType),
+                    description: 'A single CuisineType'
                 }
             },
             resolve(parent, args) {
                 let recipe = new RecipeModel({
                     name: args.name,
-                    ingredients: args.ingredients
+                    ingredients: args.ingredients,
+                    cuisine: args.cuisine
                 });
+                console.log(recipe)
+
                 return recipe.save();
             }
         }
