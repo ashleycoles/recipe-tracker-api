@@ -3,7 +3,8 @@ const graphql = require('graphql');
 const {
     GraphQLObjectType,
     GraphQLID,
-    GraphQLList
+    GraphQLList,
+    GraphQLString
 } = graphql;
 
 
@@ -35,8 +36,17 @@ module.exports = new GraphQLObjectType({
         recipes: {
             type: new GraphQLList(RecipeType),
             description: 'Retrieve all recipes',
+            args: {
+                cuisine: {
+                    type: GraphQLString,
+                    description: 'Name of the desired cuisine'
+                }
+            },
             resolve(parent, args) {
-                return RecipeModel.find({});
+                if (!args.cuisine) {
+                    return RecipeModel.find({});
+                }
+                return RecipeModel.find({"cuisine.name": args.cuisine})
             }
         },
         cuisine: {
