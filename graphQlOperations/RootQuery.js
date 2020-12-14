@@ -43,7 +43,6 @@ module.exports = new GraphQLObjectType({
                 }
             },
             resolve(parent, args) {
-                console.log(args.cuisine)
                 if (!args.cuisine) {
                     return RecipeModel.find({});
                 }
